@@ -1,0 +1,4 @@
+com\demowebshop\testscripts\RegisterTest.class
+com\demowebshop\testscripts\UserAccountTest.class
+com\demowebshop\testscripts\LoginTest.class
+com\demowebshop\testscripts\HomeTest.class
