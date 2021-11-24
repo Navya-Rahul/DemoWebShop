@@ -43,12 +43,11 @@ public class HomePage extends TestHelper {
     {
         return page.getPageTitle(driver);
     }
-    /*public String getHomePageExpectedTitle() throws IOException {
-        List<String> excelList = new ArrayList<String>();
-        ExcelUtility excel = new ExcelUtility();
-        excelList = excel.readDataFromExcel(Constants.FILE_PATH,Constants.SHEET_NAME);
+    public String getHomePageExpectedTitle() throws IOException
+    {
+        List<String> excelList = excel.readDataFromExcel(Constants.FILE_PATH,Constants.HOME_SHEET_NAME);
         return excelList.get(0);
-    }*/
+    }
     public RegisterPage clickOnRegisterMenu()
     {
         page.clickOnElement(registerMenu);

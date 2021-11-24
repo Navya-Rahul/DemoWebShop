@@ -16,8 +16,8 @@ public class HomeTest extends Base {
 
     @Test(priority = 1, enabled = true, description = "Verification of Home Page Title")
     public void verifyHomePageTitle() throws IOException {
-        String expectedTitle = "Demo Web Shop";
         home = new HomePage(driver);
+        String expectedTitle = home.getHomePageExpectedTitle();
         String actualTitle = home.getHomePageActualTitle();
         Assert.assertEquals(actualTitle, expectedTitle, "ERROR : INVALID HOME PAGE TITLE FOUND");
         test.log(LogStatus.PASS, "HOME PAGE TITLE IS MATCHING");

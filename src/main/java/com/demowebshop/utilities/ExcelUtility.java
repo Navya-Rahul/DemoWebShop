@@ -1,11 +1,14 @@
 package com.demowebshop.utilities;
 
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,16 +19,17 @@ public class ExcelUtility {
     public static XSSFSheet sh;
     public static FileInputStream f;
     public List<String> readDataFromExcel(String filePath, String sheetName) throws IOException {
+        String path = System.getProperty("user.dir")+ File.separator+ filePath;
+        List<String> list = new ArrayList<String>();
         DataFormatter formatter = new DataFormatter();
-        f = new FileInputStream(System.getProperty("user.dir") + filePath);
-        wb = new XSSFWorkbook(f);
-        sh = wb.getSheet(sheetName);
-        ArrayList<String> excelRows = new ArrayList<String>();
-        for(Row r : sh) {
+        FileInputStream file = new FileInputStream(path);
+        XSSFWorkbook workbook = new XSSFWorkbook(file);
+        XSSFSheet sheet = workbook.getSheet(sheetName);
+        for (Row r : sheet) {
             for (Cell c : r) {
-                excelRows.add(formatter.formatCellValue(c));
+                list.add(formatter.formatCellValue(c));
             }
         }
-        return excelRows;
+        return list;
     }
 }

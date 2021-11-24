@@ -1,5 +1,6 @@
 package com.demowebshop.pages;
 
+import com.demowebshop.constants.Constants;
 import com.demowebshop.utilities.PageUtility;
 import com.demowebshop.utilities.TestHelper;
 import org.openqa.selenium.By;
@@ -8,7 +9,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 public class RegisterPage extends TestHelper {
     WebDriver driver;
@@ -108,4 +111,18 @@ public class RegisterPage extends TestHelper {
         page.clickOnElement(registerButton);
         return new UserAccountPage(driver);
     }
+    public String randomStringGeneration(){
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        int length = 5;
+        for(int i = 0; i < length; i++) {
+            int index = random.nextInt(alphabet.length());
+            char randomChar = alphabet.charAt(index);
+            sb.append(randomChar);
+        }
+        String randomStringEmail = sb.toString()+"@gmail.com";
+        return randomStringEmail;
+    }
+
 }

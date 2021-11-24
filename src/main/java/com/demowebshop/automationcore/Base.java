@@ -66,7 +66,7 @@ public class Base {
     public static void startTest()
     {
         report = new ExtentReports(System.getProperty("user.dir")+"//test-output//Extent.html");
-        test = report.startTest("Demo Web Shop Issues");
+        test = report.startTest("DEMO WEB SHOP");
     }
     @BeforeMethod
     @Parameters("browser")
@@ -78,6 +78,12 @@ public class Base {
     @AfterSuite
     public void sendingEmail(){
         EmailUtility.sendEmail(System.getProperty("user.dir")+"//test-output//","Extent.html",Constants.TO_EMAIL_ID);
+    }
+    @AfterTest
+    public static void endTest()
+    {
+        report.endTest(test);
+        report.flush();
     }
     @AfterMethod
     public void tearDown(ITestResult result) throws IOException {
