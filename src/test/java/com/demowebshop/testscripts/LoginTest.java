@@ -22,7 +22,7 @@ public class LoginTest extends Base {
     UserAccountPage userAccount;
     ThreadLocal<ExtentTest> extentTest = TestListener.getTestInstance();
     ExcelUtility excel = new ExcelUtility();
-    @Test(priority = 3,enabled = true,description = "Verification of User Login")
+    @Test(priority = 3,enabled = true,description = "Verification of User Login",groups = {"Sanity"})
     public void verifyUserLogin() throws IOException {
         extentTest.get().assignCategory("Sanity");
         home = new HomePage(driver);

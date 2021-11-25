@@ -17,7 +17,7 @@ import java.util.List;
 public class HomeTest extends Base {
     HomePage home;
     ThreadLocal<ExtentTest> extentTest = TestListener.getTestInstance();
-    @Test(priority = 1, enabled = true, description = "Verification of Home Page Title")
+    @Test(priority = 1, enabled = true, description = "Verification of Home Page Title",groups = {"Regression"})
     public void verifyHomePageTitle() throws IOException {
         extentTest.get().assignCategory("Regression");
         home = new HomePage(driver);

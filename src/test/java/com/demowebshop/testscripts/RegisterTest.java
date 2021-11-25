@@ -22,7 +22,7 @@ public class RegisterTest extends Base {
     UserAccountPage userAccount;
     ThreadLocal<ExtentTest> extentTest = TestListener.getTestInstance();
     ExcelUtility excel = new ExcelUtility();
-    @Test(priority = 2,enabled = true,description = "Verification of User Registration")
+    @Test(priority = 2,enabled = true,description = "Verification of User Registration",groups = {"Regression"})
     public void verifyUserRegistration() throws IOException {
         List<String> excelList = excel.readDataFromExcel(Constants.FILE_PATH,Constants.REGISTER_SHEET_NAME);
         home = new HomePage(driver);

@@ -82,8 +82,6 @@ public class Base {
     @AfterMethod
     public void tearDown(ITestResult result) throws IOException {
         takeScreenshot(result);
-        //String imagePath = test.addScreenCapture(path);
-        //test.log(LogStatus.FAIL,"FAILED",imagePath);
         driver.close();
     }
     public void takeScreenshot(ITestResult result) throws IOException
@@ -97,8 +95,6 @@ public class Base {
             File screenshot = takeScreenshot.getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(screenshot,new File("./Screenshots/"+result.getName()+currentDate+".png"));
         }
-        //String destination = "./Screenshots/"+result.getName()+currentDate+".png";
-        //return destination;
     }
 
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression Suite">
+    <listeners>
+        <listener class-name="com.demowebshop.listener.TestListener"/>
+    </listeners>
+    <test name="DEMO WEB SHOP">
+        <groups>
+            <run>
+                <include name="Sanity"></include>
+                <include name="Regression"/>
+            </run>
+        </groups>
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.demowebshop.testscripts.HomeTest">
+                <methods>
+                    <include name="verifyHomePageTitle"/>
+                </methods>
+            </class>
+            <class name="com.demowebshop.testscripts.LoginTest">
+                <methods>
+                    <include name="verifyUserLogin"/>
+                </methods>
+            </class>
+            <class name="com.demowebshop.testscripts.RegisterTest">
+                <methods>
+                    <include name="verifyUserRegistration"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
