@@ -5,6 +5,7 @@ import com.demowebshop.utilities.EmailUtility;
 import com.demowebshop.utilities.WaitUtility;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -16,6 +17,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
+import javax.mail.MessagingException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -30,8 +32,8 @@ public class Base {
     public WebDriver driver;
     FileInputStream file;
     public Properties prop;
-    public static ExtentTest test;
-    static ExtentReports report;
+    EmailUtility email;
+    public static ExtentTest extentTest;
     public Base()
     {
         try {
@@ -62,12 +64,7 @@ public class Base {
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().pageLoadTimeout(WaitUtility.PAGE_LOAD_WAIT, TimeUnit.SECONDS);
     }
-    @BeforeTest
-    public static void startTest()
-    {
-        report = new ExtentReports(System.getProperty("user.dir")+"//test-output//Extent.html");
-        test = report.startTest("DEMO WEB SHOP");
-    }
+
     @BeforeMethod
     @Parameters("browser")
     public void setup(String browserName) {
@@ -77,17 +74,16 @@ public class Base {
     }
     @AfterSuite
     public void sendingEmail(){
-        EmailUtility.sendEmail(System.getProperty("user.dir")+"//test-output//","Extent.html",Constants.TO_EMAIL_ID);
-    }
-    @AfterTest
-    public static void endTest()
-    {
-        report.endTest(test);
-        report.flush();
+        String dateName = new SimpleDateFormat("yyyyMMdd").format(new Date());
+        email = new EmailUtility();
+        email.sendEmail(System.getProperty("user.dir")+"//TestReport//","ExtentReport_"+dateName+".html", prop.getProperty("toEmail"));
+
     }
     @AfterMethod
     public void tearDown(ITestResult result) throws IOException {
         takeScreenshot(result);
+        //String imagePath = test.addScreenCapture(path);
+        //test.log(LogStatus.FAIL,"FAILED",imagePath);
         driver.close();
     }
     public void takeScreenshot(ITestResult result) throws IOException
@@ -101,6 +97,8 @@ public class Base {
             File screenshot = takeScreenshot.getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(screenshot,new File("./Screenshots/"+result.getName()+currentDate+".png"));
         }
+        //String destination = "./Screenshots/"+result.getName()+currentDate+".png";
+        //return destination;
     }
 
 }
